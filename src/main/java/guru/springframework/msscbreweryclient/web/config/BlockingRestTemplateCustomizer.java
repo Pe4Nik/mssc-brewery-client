@@ -19,16 +19,16 @@ import org.springframework.web.client.RestTemplate;
 public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
 
     private final Integer maxTotalConnections;
-    private final Integer defaultMaxTotalConnetions;
+    private final Integer defaultMaxTotalConnections;
     private final Integer connectionRequestTimeout;
     private final Integer socketTimeout;
 
     public BlockingRestTemplateCustomizer(@Value("${sfg.maxtotalconnections}") Integer maxTotalConnections,
-                                          @Value("${sfg.defaultmaxtotalconnections}") Integer defaultMaxTotalConnetions,
-                                          @Value("${sfg.connectionrequesttimeout}")Integer connectionRequestTimeout,
-                                          @Value("${sfg.sockettimeout}")Integer socketTimeout) {
+                                          @Value("${sfg.defaultmaxtotalconnections}") Integer defaultMaxTotalConnections,
+                                          @Value("${sfg.connectionrequesttimeout}") Integer connectionRequestTimeout,
+                                          @Value("${sfg.sockettimeout}") Integer socketTimeout) {
         this.maxTotalConnections = maxTotalConnections;
-        this.defaultMaxTotalConnetions = defaultMaxTotalConnetions;
+        this.defaultMaxTotalConnections = defaultMaxTotalConnections;
         this.connectionRequestTimeout = connectionRequestTimeout;
         this.socketTimeout = socketTimeout;
     }
@@ -36,7 +36,7 @@ public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
     public ClientHttpRequestFactory clientHttpRequestFactory(){
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(maxTotalConnections);
-        connectionManager.setDefaultMaxPerRoute(defaultMaxTotalConnetions);
+        connectionManager.setDefaultMaxPerRoute(defaultMaxTotalConnections);
 
         RequestConfig requestConfig = RequestConfig
                 .custom()
